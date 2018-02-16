@@ -25,6 +25,11 @@ export default {
   initField(key, path, data, update = false) {
     const initial = this.state.get('current', 'props');
     const struct = utils.pathToStruct(path);
+
+    if (!this.state.$struct.includes(struct)) {
+      return null;
+    }
+
     // try to get props from separated objects
     const $try = (prop) => {
       let v = _.get(initial[prop], path);
